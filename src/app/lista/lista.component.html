@@ -1,0 +1,13 @@
+<button (click)="mostrar()" button class="btn btn-primary">{{buttonlegend}}</button>
+<input [(ngModel)]="test1">
+<button (click)="funcion()" button class="btn btn-primary">testingNgModel</button>
+<div class="card">
+  <div class="card-header">
+    Listado
+  </div>
+</div>
+<ul class="list-group" *ngIf="show">
+    <li class="list-group-item" *ngFor="let item of list">
+      {{item}}
+    </li>
+</ul>

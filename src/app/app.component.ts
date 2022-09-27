@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'project';
+  test1 : string = "hola";
+  test2 : number = 777;
 }
