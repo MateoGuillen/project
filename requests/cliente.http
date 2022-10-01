@@ -1,0 +1,32 @@
+@api = http://localhost:8080
+
+
+### cliente
+GET {{api}}/api/clientes
+
+### Create cliente
+POST {{api}}/api/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Mateo Giovanni 3",
+  "apellido": "Guillen 3",
+  "email": "mateo3@gmail.com"
+}
+
+### get cliente
+GET {{api}}/api/clientes/1
+
+### delete cliente
+DELETE {{api}}/api/clientes/3
+
+
+### update cliente
+PUT {{api}}/api/clientes/4
+Content-Type: application/json
+
+{
+  "nombre": "Mateo Giovanni Test",
+  "apellido": "Guillen",
+  "email": "mateo@gmail.com"
+}

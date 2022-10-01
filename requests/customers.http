@@ -1,0 +1,33 @@
+@api = http://localhost:8080
+
+### customers
+GET {{api}}/api/customers
+
+### customers
+
+
+### Create cuota
+POST {{api}}/api/customers
+Content-Type: application/json
+
+{
+  "nombre": "Antonella"
+  //"cuotaId": 2
+}
+
+### get cuota
+GET {{api}}/api/customers/2
+
+### delete cuota
+DELETE {{api}}/api/customers/1
+
+
+### update cuota
+PUT {{api}}/api/customers/2
+Content-Type: application/json
+
+{
+  "title": "Editado Tesdadst",
+  "description": "edit",
+  "published":true
+}

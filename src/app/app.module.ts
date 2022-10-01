@@ -8,6 +8,21 @@ import { ListaComponent } from './lista/lista.component';
 import { FormsModule } from '@angular/forms';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteService } from './clientes/cliente.service';
+import { Routes, RouterModule } from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import { FormComponent } from './clientes/form.component'
+
+const routes: Routes = [
+
+  {path: '', redirectTo: '/clientes', pathMatch: 'full'},
+  {path: 'listado', component: ListaComponent},
+  {path: 'clientes', component: ClientesComponent},
+  {path: 'clientes/form', component: FormComponent},
+  {path: 'clientes/form/:id', component: FormComponent},
+
+
+];
+
 
 
 @NgModule({
@@ -16,11 +31,14 @@ import { ClienteService } from './clientes/cliente.service';
     HeaderComponent,
     FooterComponent,
     ListaComponent,
-    ClientesComponent
+    ClientesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule, // add formsmodule for use ngModel
+    RouterModule.forRoot(routes), // add routermodule to imports,
+    HttpClientModule
   ],
   providers: [ClienteService],
   bootstrap: [AppComponent]
