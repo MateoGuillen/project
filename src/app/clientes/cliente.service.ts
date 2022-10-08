@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from './cliente';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class ClienteService {
     new Cliente(3,"oscar","vega","oscar@gmail.com","10/9/2022"),
   ];*/
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getClientes(): Observable<Cliente[]>{
     return this.http.get<Cliente[]>(this.urlEndPoint);
@@ -27,11 +29,31 @@ export class ClienteService {
   }
 
   create(cliente: Cliente) : Observable<Cliente> {
-    return this.http.post<Cliente>(this.urlEndPoint, cliente, {headers: this.httpHeaders})
+    return this.http.post<Cliente>(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
+      catchError( e => {
+        this.router.navigate(['/clientes']);
+        console.log(e)
+        Swal.fire({
+          title: 'Error al crear!',
+          text: e.error.message,
+        });
+        return throwError(() => e);
+      })
+    );
   }
 
   getCliente(id: number): Observable<Cliente>{
-    return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`)
+    return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
+      catchError( e => {
+        this.router.navigate(['/clientes']);
+        console.log(e)
+        Swal.fire({
+          title: 'Error al Editar!',
+          text: e.error.message,
+        });
+        return throwError(() => e);
+      })
+    );
   }
 
   update(cliente: Cliente): Observable<Cliente>{
@@ -39,7 +61,17 @@ export class ClienteService {
   }
 
   delete(id: number ): Observable<Cliente>{
-    return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders})
+    return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError( e => {
+        this.router.navigate(['/clientes']);
+        console.log(e)
+        Swal.fire({
+          title: 'Error al borrar!',
+          text: e.error.message,
+        });
+        return throwError(() => e);
+      })
+    );
   }
 
 

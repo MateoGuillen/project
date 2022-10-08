@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  public cliente: Cliente = new Cliente(-1, 'clientenuevo', 'apellido', 'c@email.com');
+  public cliente: Cliente = new Cliente(-1, null, null, null);
 
   public titulo: string = 'Crear Cliente';
 
